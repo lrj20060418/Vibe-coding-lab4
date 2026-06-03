@@ -20,6 +20,9 @@ npm run dev
 
 # 构建生产版本
 npm run build
+
+# 运行自动化测试
+npm test
 ```
 
 浏览器访问 `http://localhost:5173/`。
@@ -36,6 +39,9 @@ npm run build
 | 完成状态 | checkbox 勾选持久化，刷新后保留 |
 | 进度概览 | 计划数、学习天数、总时长、任务完成率 |
 | 导出 | 单个计划导出为 Markdown（含完成情况） |
+| AI 建议 | 基于计划数据的负载提醒、进度反馈 |
+| 每日细化 | 生成详细 Markdown 计划与可勾选完成标准 |
+| 自动化测试 | Vitest 单元测试，`npm test` |
 
 ## 项目结构
 

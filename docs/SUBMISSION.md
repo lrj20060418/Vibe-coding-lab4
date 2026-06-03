@@ -11,6 +11,8 @@
 - [x] `docs/specs/01-plan-create-save.md`
 - [x] `docs/specs/02-unified-calendar.md`
 - [x] `docs/specs/03-day-detail-completion.md`
+- [x] `docs/specs/04-ai-extensions.md`
+- [x] `docs/TEST_PLAN.md`
 
 ## 3. Trae 协作记录
 - [ ] **需手动导出**：在 Trae/Cursor 中导出聊天记录，放入 `docs/trae-chat/` 目录
