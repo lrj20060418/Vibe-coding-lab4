@@ -5,6 +5,7 @@ import { ProgressOverview } from '../components/ProgressOverview'
 import { UnifiedCalendar } from '../components/UnifiedCalendar'
 import { HistoryPanel } from '../components/HistoryPanel'
 import { DayPreview } from '../components/DayPreview'
+import { AiSuggestionsPanel } from '../components/AiSuggestionsPanel'
 import { usePlans } from '../hooks/usePlans'
 import { calculateProgress } from '../utils/progress'
 import { getDayPlanEntries } from '../utils/calendarAggregate'
@@ -36,6 +37,7 @@ export function HomePage() {
               <PlanForm onSubmit={addPlan} />
             </div>
             <HistoryPanel plans={plans} onDelete={deletePlan} />
+            <AiSuggestionsPanel plans={plans} />
           </div>
 
           <div className="lg:col-span-2">

@@ -53,3 +53,23 @@ export interface FormErrors {
   days?: string
   dailyHours?: string
 }
+
+export interface LearningSuggestion {
+  id: string
+  type: 'warning' | 'info' | 'success'
+  title: string
+  content: string
+}
+
+export interface RefinementChecklistItem {
+  id: string
+  text: string
+  completed: boolean
+}
+
+export interface DailyRefinement {
+  date: string
+  markdown: string
+  checklist: RefinementChecklistItem[]
+  generatedAt: string
+}

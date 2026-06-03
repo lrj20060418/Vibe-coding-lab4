@@ -1,7 +1,10 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Navbar } from '../components/Navbar'
+import { DailyRefinementPanel } from '../components/DailyRefinementPanel'
 import { usePlans } from '../hooks/usePlans'
+import { getRefinement } from '../storage/refinements'
+import type { DailyRefinement } from '../types'
 import {
   getAdjacentTaskDate,
   getDayPlanEntries,
@@ -13,6 +16,13 @@ export function DayDetailPage() {
   const { date } = useParams<{ date: string }>()
   const navigate = useNavigate()
   const { plans, loading, updateTaskCompletion } = usePlans()
+  const [refinement, setRefinement] = useState<DailyRefinement | undefined>(() =>
+    date ? getRefinement(date) : undefined,
+  )
+
+  useEffect(() => {
+    setRefinement(date ? getRefinement(date) : undefined)
+  }, [date])
 
   const entries = useMemo(
     () => (date ? getDayPlanEntries(plans, date) : []),
@@ -154,6 +164,13 @@ export function DayDetailPage() {
             </section>
           ))}
         </div>
+
+        <DailyRefinementPanel
+          date={date}
+          entries={entries}
+          initialRefinement={refinement}
+          onRefinementChange={setRefinement}
+        />
       </main>
     </div>
   )
