@@ -1,4 +1,6 @@
-﻿fd39e27 feat: 娣诲姞 AI 瀛︿範寤鸿涓庢瘡鏃ヨ鍒掔粏鍖?55d1ccd test: 娣诲姞 Vitest 鑷姩鍖栨祴璇?82b41e8 docs: 娣诲姞鎻愪氦娓呭崟涓?git log 璁板綍
+﻿1c95245 feat: Markdown 娓叉煋姣忔棩璁″垝缁嗗寲缁撴灉
+b629f0f feat: 鎺ュ叆 Express AI 鍚庣涓庢櫤璋?API 浠ｇ悊
+85723d3 docs: 鏇存柊瀹為獙鎬荤粨銆丼pec 涓庢祴璇曡鍒?fd39e27 feat: 娣诲姞 AI 瀛︿範寤鸿涓庢瘡鏃ヨ鍒掔粏鍖?55d1ccd test: 娣诲姞 Vitest 鑷姩鍖栨祴璇?82b41e8 docs: 娣诲姞鎻愪氦娓呭崟涓?git log 璁板綍
 081baca docs: 娣诲姞 Spec 鏂囨。銆丷EADME 涓庡疄楠屾€荤粨
 19bc737 feat: 瀹屾垚璁″垝鍒涘缓銆佺粺涓€鏃ュ巻銆佹瘡鏃ヨ鎯呬笌杩涘害鍔熻兘
 6fab076 feat: 瀹屾垚璁″垝鏁版嵁妯″瀷涓?localStorage 鎸佷箙鍖?51b6ba7 feat: 鍒濆鍖栧涔犺鍒掑伐浣滃彴椤圭洰
