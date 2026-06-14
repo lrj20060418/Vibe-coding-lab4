@@ -22,7 +22,7 @@ function guessMaterial(planTitle: string, taskTitle: string): string {
   return `与「${planTitle}」相关的官方文档、教程或教材章节`
 }
 
-export function refineDailyPlan(date: string, entries: DayPlanEntry[]): DailyRefinement {
+export function refineDailyPlanLocal(date: string, entries: DayPlanEntry[]): DailyRefinement {
   const totalHours = getDayTotalHours(entries)
   const lines: string[] = [
     `## ${formatDisplayDate(date)} 详细计划`,
@@ -73,5 +73,9 @@ export function refineDailyPlan(date: string, entries: DayPlanEntry[]): DailyRef
     markdown: lines.join('\n'),
     checklist,
     generatedAt: new Date().toISOString(),
+    source: 'local',
   }
 }
+
+/** @deprecated 使用 fetchDailyRefinement */
+export const refineDailyPlan = refineDailyPlanLocal

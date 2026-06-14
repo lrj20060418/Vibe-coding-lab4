@@ -5,7 +5,8 @@ import {
   saveRefinement,
   updateRefinementChecklist,
 } from '../storage/refinements'
-import { refineDailyPlan } from '../utils/aiDailyRefinement'
+import { fetchDailyRefinement, type AiSource } from '../services/aiApi'
+import { MarkdownContent } from './MarkdownContent'
 import type { DayPlanEntry } from '../types'
 
 interface DailyRefinementPanelProps {
@@ -25,14 +26,18 @@ export function DailyRefinementPanel({
     initialRefinement,
   )
   const [loading, setLoading] = useState(false)
+  const [source, setSource] = useState<AiSource>(initialRefinement?.source ?? 'local')
+  const [error, setError] = useState<string | null>(null)
 
   const handleGenerate = async () => {
     setLoading(true)
-    await new Promise((r) => setTimeout(r, 400))
-    const result = refineDailyPlan(date, entries)
-    saveRefinement(result)
-    setRefinement(result)
-    onRefinementChange(result)
+    setError(null)
+    const result = await fetchDailyRefinement(date, entries)
+    saveRefinement(result.data)
+    setRefinement(result.data)
+    setSource(result.source)
+    if (result.error) setError(result.error)
+    onRefinementChange(result.data)
     setLoading(false)
   }
 
@@ -53,7 +58,20 @@ export function DailyRefinementPanel({
   return (
     <section className="rounded-xl border border-indigo-200 bg-white p-5 shadow-sm">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-lg font-semibold text-slate-800">AI 每日计划细化</h2>
+        <div className="flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-slate-800">AI 每日计划细化</h2>
+          {refinement && (
+            <span
+              className={`rounded-full px-2 py-0.5 text-xs ${
+                source === 'ai'
+                  ? 'bg-indigo-100 text-indigo-700'
+                  : 'bg-slate-100 text-slate-600'
+              }`}
+            >
+              {source === 'ai' ? '大模型' : '本地规则'}
+            </span>
+          )}
+        </div>
         <div className="flex gap-2">
           <button
             type="button"
@@ -61,7 +79,7 @@ export function DailyRefinementPanel({
             disabled={loading}
             className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
           >
-            {loading ? '生成中…' : refinement ? '重新生成' : '细化当天计划'}
+            {loading ? 'AI 生成中…' : refinement ? '重新生成' : '细化当天计划'}
           </button>
           {refinement && (
             <button
@@ -77,19 +95,23 @@ export function DailyRefinementPanel({
 
       {!refinement && !loading && (
         <p className="text-sm text-slate-500">
-          点击「细化当天计划」，AI 将根据当天所有任务生成学习材料、具体练习和完成标准。
+          点击「细化当天计划」，系统将调用大模型 API 生成学习材料、具体练习和完成标准（未配置 API 时自动降级为本地模板）。
         </p>
       )}
 
       {loading && (
-        <p className="animate-pulse text-sm text-indigo-600">正在分析当天任务并生成详细计划…</p>
+        <p className="animate-pulse text-sm text-indigo-600">正在调用 AI 分析当天任务并生成详细计划…</p>
+      )}
+
+      {error && source === 'local' && refinement && (
+        <p className="mb-3 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-800">
+          AI 调用失败，已使用本地模板：{error}
+        </p>
       )}
 
       {refinement && !loading && (
         <div className="space-y-4">
-          <pre className="max-h-80 overflow-auto whitespace-pre-wrap rounded-lg bg-slate-50 p-4 font-sans text-sm leading-relaxed text-slate-700">
-            {refinement.markdown}
-          </pre>
+          <MarkdownContent content={refinement.markdown} />
 
           {refinement.checklist.length > 0 && (
             <div>
@@ -118,6 +140,7 @@ export function DailyRefinementPanel({
 
           <p className="text-xs text-slate-400">
             生成于 {new Date(refinement.generatedAt).toLocaleString('zh-CN')}
+            {refinement.source === 'ai' ? ' · 由大模型生成' : ' · 本地模板生成'}
           </p>
         </div>
       )}
