@@ -5,17 +5,24 @@
 ## 1. 项目代码
 - [x] 完整前端代码
 - [x] README.md（运行说明）
-- 无需 `.env`（纯 localStorage，无 API Key）
+- [x] `.env.example`（AI API 配置说明）
+- 实际 `.env` 含 API Key，**不要提交 git**
 
 ## 2. Spec 设计记录
 - [x] `docs/specs/01-plan-create-save.md`
 - [x] `docs/specs/02-unified-calendar.md`
 - [x] `docs/specs/03-day-detail-completion.md`
-- [x] `docs/specs/04-ai-extensions.md`
-- [x] `docs/TEST_PLAN.md`
+- [x] `docs/specs/04-ai-extensions.md`（拓展）
+- [x] **`docs/trae-spec/`** — Trae /spec 风格完整导出（含迭代日志）
+  - `SPEC-01-plan-create-save.md`
+  - `SPEC-02-unified-calendar.md`
+  - `SPEC-03-day-detail-completion.md`
+  - `ITERATION-LOG.md`（修正前后对照）
 
 ## 3. Trae 协作记录
-- [ ] **需手动导出**：在 Trae/Cursor 中导出聊天记录，放入 `docs/trae-chat/` 目录
+- [x] `docs/trae-chat/COLLABORATION-LOG.md` — 分阶段协作摘要
+- [x] `docs/trae-chat/README.md` — 说明与导出指引
+- [ ] （可选）Cursor 对话完整导出 PDF/Markdown 追加至本目录
 
 ## 4. 版本管理记录
 - [x] `docs/git-log.txt`
@@ -27,7 +34,8 @@
 
 ```bash
 npm install --registry https://registry.npmmirror.com
-npm run dev
+cp .env.example .env   # 填入 AI_API_KEY
+npm run dev:all        # 同时启动后端 + 前端
 ```
 
 访问 http://localhost:5173/

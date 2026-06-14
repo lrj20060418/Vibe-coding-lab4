@@ -58,3 +58,5 @@
 
 - **初版描述**：「查看某天详情」— 不够清晰
 - **修正后**：「以日期为中心展示当天所有计划的任务，路由 /day/:date，不使用 planId + dayIndex」
+
+> 完整 Trae 风格导出见 [`docs/trae-spec/SPEC-03-day-detail-completion.md`](../trae-spec/SPEC-03-day-detail-completion.md)

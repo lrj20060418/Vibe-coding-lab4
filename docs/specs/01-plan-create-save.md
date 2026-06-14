@@ -45,3 +45,10 @@
 - [x] 表单校验：空主题、天数<1、时长超范围有提示
 - [x] 无计划时有空状态引导
 - [x] 保存后数据结构完整（含 date、goal、tasks）
+
+## 迭代修正记录
+
+- **初版（模糊）**：「用户可以创建学习计划并保存」— 未明确结构化逐日任务与校验规则
+- **修正后（明确）**：「表单校验通过后生成 LearningPlan + DailyPlan[] + Task[]，多计划 localStorage 并存，首页含空状态与进度概览」
+
+> 完整 Trae 风格导出见 [`docs/trae-spec/SPEC-01-plan-create-save.md`](../trae-spec/SPEC-01-plan-create-save.md)

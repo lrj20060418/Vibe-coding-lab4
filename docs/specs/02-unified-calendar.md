@@ -53,3 +53,5 @@
 
 - **初版描述**：「日历展示学习计划」— 不够清晰
 - **修正后**：「日历展示所有已保存计划的任务，并按日期聚合合并显示合计时长或任务数」
+
+> 完整 Trae 风格导出见 [`docs/trae-spec/SPEC-02-unified-calendar.md`](../trae-spec/SPEC-02-unified-calendar.md)
