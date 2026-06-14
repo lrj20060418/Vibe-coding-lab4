@@ -72,4 +72,5 @@ export interface DailyRefinement {
   markdown: string
   checklist: RefinementChecklistItem[]
   generatedAt: string
+  source?: 'ai' | 'local'
 }

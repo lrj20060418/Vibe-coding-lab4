@@ -1,7 +1,8 @@
-import type { LearningPlan, LearningSuggestion } from '../types'
+import type { DayPlanEntry, LearningPlan, LearningSuggestion } from '../types'
 import { aggregateCalendarDays } from './calendarAggregate'
 import { calculateProgress } from './progress'
 import { formatDisplayDate } from './dates'
+import { getDayTotalHours } from './calendarAggregate'
 
 const OVERLOAD_HOURS = 5
 const WEEKLY_HOURS_WARNING = 16
@@ -28,7 +29,60 @@ function getUpcomingWeekStart(): string {
   return `${y}-${m}-${d}`
 }
 
-export function generateLearningSuggestions(plans: LearningPlan[]): LearningSuggestion[] {
+/** 构建发给 AI 的精简摘要 */
+export function buildPlanSummaryForAi(plans: LearningPlan[]) {
+  const stats = calculateProgress(plans)
+  const aggregated = aggregateCalendarDays(plans)
+  const weekStart = getUpcomingWeekStart()
+  const weekDates = getWeekDates(weekStart)
+
+  let weeklyHours = 0
+  const dailyLoads: { date: string; hours: number; plans: string[] }[] = []
+
+  for (const date of weekDates) {
+    const day = aggregated.get(date)
+    if (day) {
+      weeklyHours += day.totalHours
+      dailyLoads.push({
+        date,
+        hours: day.totalHours,
+        plans: day.planTitles,
+      })
+    }
+  }
+
+  return {
+    planCount: stats.planCount,
+    totalTasks: stats.totalTasks,
+    completedTasks: stats.completedTasks,
+    completionRate: stats.completionRate,
+    weeklyHours: Math.round(weeklyHours * 10) / 10,
+    weekStart,
+    overloadThreshold: OVERLOAD_HOURS,
+    weeklyWarningThreshold: WEEKLY_HOURS_WARNING,
+    dailyLoads,
+    plans: plans.map((p) => {
+      const total = p.dailyPlans.reduce((s, d) => s + d.tasks.length, 0)
+      const done = p.dailyPlans.reduce(
+        (s, d) => s + d.tasks.filter((t) => t.completed).length,
+        0,
+      )
+      return {
+        title: p.title,
+        startDate: p.startDate,
+        days: p.days,
+        dailyHours: p.dailyHours,
+        notes: p.notes,
+        completedTasks: done,
+        totalTasks: total,
+        completionRate: total > 0 ? Math.round((done / total) * 100) : 0,
+      }
+    }),
+  }
+}
+
+/** 本地规则引擎（AI 不可用时的降级方案） */
+export function generateLearningSuggestionsLocal(plans: LearningPlan[]): LearningSuggestion[] {
   if (plans.length === 0) return []
 
   const suggestions: LearningSuggestion[] = []
@@ -81,8 +135,7 @@ export function generateLearningSuggestions(plans: LearningPlan[]): LearningSugg
       (s, d) => s + d.tasks.filter((t) => t.completed).length,
       0,
     )
-    const pending = total - done
-    if (pending > 0 && done > 0 && done / total < 0.5) {
+    if (total - done > 0 && done > 0 && done / total < 0.5) {
       suggestions.push({
         id: `lag-${plan.id}`,
         type: 'info',
@@ -97,7 +150,7 @@ export function generateLearningSuggestions(plans: LearningPlan[]): LearningSugg
       id: 'good-progress',
       type: 'success',
       title: '学习进展良好',
-      content: `整体完成率已达 ${stats.completionRate}%，继续保持！可适当增加练习深度或开始下一个学习主题。`,
+      content: `整体完成率已达 ${stats.completionRate}%，继续保持！`,
     })
   }
 
@@ -110,5 +163,49 @@ export function generateLearningSuggestions(plans: LearningPlan[]): LearningSugg
     })
   }
 
+  if (stats.completedTasks > 0) {
+    const lagPlans = plans.filter((p) => {
+      const total = p.dailyPlans.reduce((s, d) => s + d.tasks.length, 0)
+      const done = p.dailyPlans.reduce(
+        (s, d) => s + d.tasks.filter((t) => t.completed).length,
+        0,
+      )
+      return done > 0 && done < total
+    })
+    suggestions.push({
+      id: 'review-summary',
+      type: 'info',
+      title: '学习复盘',
+      content: `已完成 ${stats.completedTasks}/${stats.totalTasks} 项任务（${stats.completionRate}%）。${
+        lagPlans.length > 0
+          ? `「${lagPlans.map((p) => p.title).join('」「')}」仍有未完成任务，建议优先补齐近期安排。`
+          : '各计划推进正常，可继续按日历执行。'
+      }`,
+    })
+  }
+
   return suggestions
+}
+
+/** @deprecated 使用 fetchLearningSuggestions */
+export const generateLearningSuggestions = generateLearningSuggestionsLocal
+
+export function buildDayContextForAi(date: string, entries: DayPlanEntry[]) {
+  return {
+    date,
+    displayDate: formatDisplayDate(date),
+    totalHours: getDayTotalHours(entries),
+    planCount: entries.length,
+    plans: entries.map((e) => ({
+      planTitle: e.planTitle,
+      goal: e.dailyPlan.goal,
+      tasks: e.dailyPlan.tasks.map((t) => ({
+        title: t.title,
+        description: t.description,
+        estimatedHours: t.estimatedHours,
+        completed: t.completed,
+        practiceSuggestion: t.practiceSuggestion,
+      })),
+    })),
+  }
 }

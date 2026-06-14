@@ -1,20 +1,20 @@
 import { describe, expect, it } from 'vitest'
-import { generateLearningSuggestions } from './aiSuggestions'
+import { generateLearningSuggestionsLocal } from './aiSuggestions'
 import { createMockPlan, createSecondPlan } from '../test/fixtures'
 import { todayString } from './dates'
 
-describe('generateLearningSuggestions', () => {
+describe('generateLearningSuggestionsLocal', () => {
   it('returns empty array when no plans', () => {
-    expect(generateLearningSuggestions([])).toEqual([])
+    expect(generateLearningSuggestionsLocal([])).toEqual([])
   })
 
   it('includes weekly summary for existing plans', () => {
-    const suggestions = generateLearningSuggestions([createMockPlan()])
+    const suggestions = generateLearningSuggestionsLocal([createMockPlan()])
     expect(suggestions.some((s) => s.id === 'weekly-summary')).toBe(true)
   })
 
   it('provides suggestions for multiple plans', () => {
-    const suggestions = generateLearningSuggestions([createMockPlan(), createSecondPlan()])
+    const suggestions = generateLearningSuggestionsLocal([createMockPlan(), createSecondPlan()])
     expect(suggestions.length).toBeGreaterThan(1)
     expect(suggestions.some((s) => s.id === 'weekly-summary')).toBe(true)
   })
@@ -33,14 +33,14 @@ describe('generateLearningSuggestions', () => {
         },
       ],
     })
-    const suggestions = generateLearningSuggestions([heavy])
+    const suggestions = generateLearningSuggestionsLocal([heavy])
     expect(suggestions.some((s) => s.id.startsWith('overload-'))).toBe(true)
   })
 
   it('suggests getting started when no tasks completed', () => {
     const plan = createMockPlan()
     plan.dailyPlans.forEach((d) => d.tasks.forEach((t) => { t.completed = false }))
-    const suggestions = generateLearningSuggestions([plan])
+    const suggestions = generateLearningSuggestionsLocal([plan])
     expect(suggestions.some((s) => s.id === 'get-started')).toBe(true)
   })
 })
