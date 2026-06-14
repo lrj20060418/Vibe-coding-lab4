@@ -1,8 +1,16 @@
-a41d2a4 docs: 琛ュ叏 Trae Spec 瀵煎嚭涓庡崗浣滆褰?0302f3b docs: 娣诲姞 Trae Spec 瀵煎嚭銆佸崗浣滆褰曚笌瀹為獙鎬荤粨
-2b0a4ad test: 琛ュ厖姣忔棩璇︽儏銆佺鍒扮涓庣粏鍖栨寔涔呭寲娴嬭瘯
-1c95245 feat: Markdown 娓叉煋姣忔棩璁″垝缁嗗寲缁撴灉
-b629f0f feat: 鎺ュ叆 Express AI 鍚庣涓庢櫤璋?API 浠ｇ悊
-85723d3 docs: 鏇存柊瀹為獙鎬荤粨銆丼pec 涓庢祴璇曡鍒?fd39e27 feat: 娣诲姞 AI 瀛︿範寤鸿涓庢瘡鏃ヨ鍒掔粏鍖?55d1ccd test: 娣诲姞 Vitest 鑷姩鍖栨祴璇?82b41e8 docs: 娣诲姞鎻愪氦娓呭崟涓?git log 璁板綍
-081baca docs: 娣诲姞 Spec 鏂囨。銆丷EADME 涓庡疄楠屾€荤粨
-19bc737 feat: 瀹屾垚璁″垝鍒涘缓銆佺粺涓€鏃ュ巻銆佹瘡鏃ヨ鎯呬笌杩涘害鍔熻兘
-6fab076 feat: 瀹屾垚璁″垝鏁版嵁妯″瀷涓?localStorage 鎸佷箙鍖?51b6ba7 feat: 鍒濆鍖栧涔犺鍒掑伐浣滃彴椤圭洰
+17b5497 docs: 合并 Spec 至 trae-spec，删除重复的 specs 目录
+977dc6a docs: 导出 Cursor 完整协作对话记录
+d28c5ff docs: 修复 git-log UTF-8 编码
+a41d2a4 docs: 补全 Trae Spec 导出与协作记录
+0302f3b docs: 添加 Trae Spec 导出、协作记录与实验总结
+2b0a4ad test: 补充每日详情、端到端与细化持久化测试
+1c95245 feat: Markdown 渲染每日计划细化结果
+b629f0f feat: 接入 Express AI 后端与智谱 API 代理
+85723d3 docs: 更新实验总结、Spec 与测试计划
+fd39e27 feat: 添加 AI 学习建议与每日计划细化
+55d1ccd test: 添加 Vitest 自动化测试
+82b41e8 docs: 添加提交清单与 git log 记录
+081baca docs: 添加 Spec 文档、README 与实验总结
+19bc737 feat: 完成计划创建、统一日历、每日详情与进度功能
+6fab076 feat: 完成计划数据模型与 localStorage 持久化
+51b6ba7 feat: 初始化学习计划工作台项目
