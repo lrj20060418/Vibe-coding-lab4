@@ -21,8 +21,8 @@
 
 ## 3. Trae 协作记录
 - [x] `docs/trae-chat/COLLABORATION-LOG.md` — 分阶段协作摘要
-- [x] `docs/trae-chat/README.md` — 说明与导出指引
-- [ ] （可选）Cursor 对话完整导出 PDF/Markdown 追加至本目录
+- [x] `docs/trae-chat/CURSOR-CHAT-EXPORT.md` — 完整对话导出（27 轮）
+- [x] `docs/trae-chat/cursor-chat-source.jsonl` — 原始会话记录
 
 ## 4. 版本管理记录
 - [x] `docs/git-log.txt`
