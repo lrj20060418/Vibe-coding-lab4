@@ -22,7 +22,7 @@
 **目标**：完成计划创建、统一日历、每日详情、进度、导出。
 
 **协作内容**：
-- `/spec` 等价文档：`docs/specs/01~03.md`
+- `/spec` 等价文档：`docs/trae-spec/SPEC-01~03.md`
 - 实现 PlanForm、HomePage、UnifiedCalendar、DayPreview、DayDetailPage、HistoryPanel
 - 路由 `/day/:date`，日历多计划聚合 `calendarAggregate.ts`
 - Git commit：`feat: 完成计划创建、统一日历、每日详情与进度功能`
@@ -36,7 +36,7 @@
 ## 阶段 3：Spec 文档与实验总结
 
 **协作内容**：
-- 编写 `docs/specs/` 三组 Spec + Checklist
+- 编写 `docs/trae-spec/` 四组 Spec + Checklist
 - 编写 `docs/LAB_SUMMARY.md`、`README.md`
 - Git commit：`docs: 添加 Spec 文档、README 与实验总结`
 
@@ -82,7 +82,7 @@
 | 工具 | 用途 | 效果 |
 |------|------|------|
 | Cursor Agent | 需求拆解、代码实现、联调排错 | 分模块推进，每阶段可运行 |
-| /spec 等价流程 | docs/specs + docs/trae-spec | 需求清晰，有迭代记录 |
+| /spec 等价流程 | docs/trae-spec | 需求清晰，有迭代记录 |
 | Vitest | 自动化测试 | 34 项测试覆盖核心 Scenario |
 | 智谱 GLM API | AI 建议与每日细化 | 大模型标签正常，失败时本地降级 |
 | MCP（HeroUI） | UI 组件文档参考 | 开发辅助，非产品功能 |

@@ -91,12 +91,13 @@ src/
   pages/          # HomePage, DayDetailPage
 server/           # Express AI 代理后端
 docs/
-  specs/          # 4 组 Spec 设计文档
+  trae-spec/      # Trae /spec 设计文档（Spec 1–4 + 迭代日志）
+  trae-chat/      # 协作对话导出
 ```
 
 ## Spec 文档
 
-见 [`docs/specs/`](docs/specs/) 目录，包含需求、Scenario、Tasks 和 Checklist。
+见 [`docs/trae-spec/`](docs/trae-spec/) 目录，包含需求、Scenario、Tasks、Checklist 与迭代记录。
 
 ## 提交说明
 

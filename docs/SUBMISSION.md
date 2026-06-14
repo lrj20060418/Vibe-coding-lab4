@@ -9,15 +9,12 @@
 - 实际 `.env` 含 API Key，**不要提交 git**
 
 ## 2. Spec 设计记录
-- [x] `docs/specs/01-plan-create-save.md`
-- [x] `docs/specs/02-unified-calendar.md`
-- [x] `docs/specs/03-day-detail-completion.md`
-- [x] `docs/specs/04-ai-extensions.md`（拓展）
-- [x] **`docs/trae-spec/`** — Trae /spec 风格完整导出（含迭代日志）
+- [x] `docs/trae-spec/` — Trae /spec 风格完整导出（Spec 1–4 + 迭代日志）
   - `SPEC-01-plan-create-save.md`
   - `SPEC-02-unified-calendar.md`
   - `SPEC-03-day-detail-completion.md`
-  - `ITERATION-LOG.md`（修正前后对照）
+  - `SPEC-04-ai-extensions.md`
+  - `ITERATION-LOG.md`
 
 ## 3. Trae 协作记录
 - [x] `docs/trae-chat/COLLABORATION-LOG.md` — 分阶段协作摘要

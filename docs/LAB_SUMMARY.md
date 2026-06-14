@@ -51,7 +51,7 @@ LearningPlan (1) ──< DailyPlan (N) ──< Task (N)
 
 ## 5. /spec 模式与迭代修正
 
-本实验要求 Trae /spec 模式；实际使用 **Cursor Agent** 完成等价流程，Spec 文档见 `docs/specs/` 与 `docs/trae-spec/`。
+本实验要求 Trae /spec 模式；实际使用 **Cursor Agent** 完成等价流程，Spec 文档见 `docs/trae-spec/`。
 
 | 初版（模糊） | 修正后（明确） |
 |-------------|---------------|
