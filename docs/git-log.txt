@@ -1,3 +1,4 @@
+f1462d1 docs: 重写实验总结为通俗表述并修复 git-log
 17b5497 docs: 合并 Spec 至 trae-spec，删除重复的 specs 目录
 977dc6a docs: 导出 Cursor 完整协作对话记录
 d28c5ff docs: 修复 git-log UTF-8 编码
